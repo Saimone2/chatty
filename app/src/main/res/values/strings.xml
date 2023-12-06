@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Chatty</string>
     <string name="developed_by_saimone">Developed by Saimone</string>
+    <string name="_1">1</string>
+    <string name="_3">3</string>
+    <string name="_2">2</string>
+    <string name="phone_number">Phone number</string>
+    <string name="enter_mobile_number">Enter mobile number</string>
+    <string name="mobile">Mobile</string>
+    <string name="send">SEND</string>
 </resources>
