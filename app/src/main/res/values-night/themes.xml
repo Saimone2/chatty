@@ -8,7 +8,7 @@
         <item name="colorSecondaryVariant">@color/mint_green</item>
         <item name="colorOnSecondary">@color/black</item>
 
-        <item name="android:windowBackground">@color/white_smoke</item>
+        <item name="android:windowBackground">@color/smoke_white</item>
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
     </style>
 
