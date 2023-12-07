@@ -7,5 +7,11 @@
     <string name="phone_number">Phone number</string>
     <string name="enter_mobile_number">Enter mobile number</string>
     <string name="mobile">Mobile</string>
-    <string name="send">SEND</string>
+    <string name="next">NEXT</string>
+    <string name="enter_the_pin_code_sent_to_your_phone">Enter the pin code sent to your phone</string>
+    <string name="resend_pin_code_in_30_sec">Resend pin code in 30 sec</string>
+    <string name="enter_your_username">Enter your username</string>
+    <string name="finish">FINISH</string>
+    <string name="username">Username</string>
+    <string name="send_pin_code">SEND PIN CODE</string>
 </resources>

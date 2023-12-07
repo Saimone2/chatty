@@ -8,7 +8,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:weightSum="100"
-    tools:context=".LoginPhoneNumberActivity">
+    tools:context=".LoginProfileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:layout_height="38dp"
             android:layout_margin="15dp"
             android:background="@drawable/circle_background"
-            android:backgroundTint="@color/chatty_blue">
+            android:backgroundTint="@color/light_gray">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
             android:layout_height="38dp"
             android:layout_margin="15dp"
             android:background="@drawable/circle_background"
-            android:backgroundTint="@color/light_gray">
+            android:backgroundTint="@color/chatty_blue">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -74,7 +74,7 @@
         android:layout_height="150dp"
         android:layout_weight="20"
         android:contentDescription="@string/phone_number"
-        android:src="@drawable/baseline_phone_android_24"
+        android:src="@drawable/baseline_account_circle_24"
         app:tint="@color/chatty_blue" />
 
     <TextView
@@ -84,7 +84,7 @@
         android:layout_weight="8"
         android:gravity="center"
         android:letterSpacing="0.08"
-        android:text="@string/enter_mobile_number"
+        android:text="@string/enter_your_username"
         android:textColor="@color/charcoal_gray"
         android:textSize="25sp"
         android:textStyle="bold" />
@@ -95,14 +95,6 @@
         android:layout_weight="5"
         android:gravity="center">
 
-        <com.hbb20.CountryCodePicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:ccp_areaCodeDetectedCountry="true"
-            app:ccp_defaultPhoneCode="380"
-            app:ccp_showFlag="false"
-            app:ccp_showNameCode="false" />
-
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,8 +102,9 @@
             android:autofillHints="phone"
             android:background="@drawable/edit_text_rounded_corner"
             android:elevation="5dp"
-            android:hint="@string/mobile"
-            android:inputType="phone"
+            android:hint="@string/username"
+            android:inputType="none"
+            android:maxLength="6"
             android:padding="12dp" />
 
     </LinearLayout>
@@ -128,7 +121,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_rounded_corner"
-            android:text="@string/send_pin_code"
+            android:text="@string/finish"
             android:textSize="17sp" />
 
         <ProgressBar
