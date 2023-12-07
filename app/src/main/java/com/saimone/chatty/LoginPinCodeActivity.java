@@ -20,6 +20,8 @@ import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 public class LoginPinCodeActivity extends AppCompatActivity {
@@ -27,7 +29,6 @@ public class LoginPinCodeActivity extends AppCompatActivity {
     Long timeoutSeconds = 60L;
     String verificationCode;
     PhoneAuthProvider.ForceResendingToken resendingToken;
-
     EditText loginPinCode;
     Button nextBtn;
     ProgressBar progressBar;
@@ -54,9 +55,12 @@ public class LoginPinCodeActivity extends AppCompatActivity {
             signIn(credential);
             setInProgress(true);
         });
+
+        resendPinCode.setOnClickListener(view -> sendPinCode(phoneNumber, true));
     }
 
     void sendPinCode(String phoneNumber, boolean isResend) {
+        startResendTimer();
         setInProgress(true);
         PhoneAuthOptions.Builder builder =
                 PhoneAuthOptions.newBuilder(auth)
@@ -91,6 +95,26 @@ public class LoginPinCodeActivity extends AppCompatActivity {
         } else {
             PhoneAuthProvider.verifyPhoneNumber(builder.build());
         }
+    }
+
+    private void startResendTimer() {
+        resendPinCode.setEnabled(false);
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                timeoutSeconds--;
+                resendPinCode.setText(getString(R.string.resend_pin_code_seconds, timeoutSeconds));
+                if (timeoutSeconds <= 0) {
+                    timeoutSeconds = 60L;
+                    timer.cancel();
+                    runOnUiThread(() -> {
+                        resendPinCode.setText(R.string.resend_pin_code);
+                        resendPinCode.setEnabled(true);
+                    });
+                }
+            }
+        }, 0, 1000);
     }
 
     void setInProgress(boolean inProgress) {

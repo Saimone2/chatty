@@ -35,6 +35,7 @@ public class LoginPhoneNumberActivity extends AppCompatActivity {
                 phoneInput.setError("Phone number not valid");
                 return;
             }
+
             Intent intent = new Intent(LoginPhoneNumberActivity.this, LoginPinCodeActivity.class);
             intent.putExtra("phone", countryCodePicker.getFullNumberWithPlus());
             startActivity(intent);

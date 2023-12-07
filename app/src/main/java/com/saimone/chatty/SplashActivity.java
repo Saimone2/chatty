@@ -1,5 +1,7 @@
 package com.saimone.chatty;
 
+import static com.saimone.chatty.utils.FirebaseUtil.isLoggedIn;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,8 +17,12 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         new Handler().postDelayed(() -> {
-            startActivity(new Intent(SplashActivity.this, LoginPhoneNumberActivity.class));
+            if (isLoggedIn()) {
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            } else {
+                startActivity(new Intent(SplashActivity.this, LoginPhoneNumberActivity.class));
+            }
             finish();
-        }, 2000);
+        }, 1000);
     }
 }

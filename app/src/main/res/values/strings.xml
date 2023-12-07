@@ -15,4 +15,7 @@
     <string name="username">Username</string>
     <string name="send_pin_code">SEND PIN CODE</string>
     <string name="pin_code">PIN CODE</string>
+    <string name="resend_pin_code">Resend pin code</string>
+    <string name="resend_pin_code_seconds">Resend pin code in %1$d seconds</string>
+    <string name="welcome">Welcome!</string>
 </resources>
