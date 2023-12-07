@@ -18,4 +18,7 @@
     <string name="resend_pin_code">Resend pin code</string>
     <string name="resend_pin_code_seconds">Resend pin code in %1$d seconds</string>
     <string name="welcome">Welcome!</string>
+    <string name="search">Search</string>
+    <string name="chats">Chats</string>
+    <string name="profile">Profile</string>
 </resources>

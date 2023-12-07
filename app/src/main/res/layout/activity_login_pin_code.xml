@@ -74,7 +74,7 @@
         android:layout_height="150dp"
         android:layout_weight="20"
         android:contentDescription="@string/phone_number"
-        android:src="@drawable/baseline_phone_android_24"
+        android:src="@drawable/baseline_phone_android"
         app:tint="@color/chatty_blue" />
 
     <TextView
@@ -121,6 +121,7 @@
             android:id="@+id/login_next_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="12dp"
             android:background="@drawable/btn_rounded_corner"
             android:text="@string/next"
             android:textSize="17sp" />
