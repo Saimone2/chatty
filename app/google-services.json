@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "43262966270",
+    "project_id": "chatty-fd366",
+    "storage_bucket": "chatty-fd366.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43262966270:android:4cd823d161d3842430e8af",
+        "android_client_info": {
+          "package_name": "com.saimone.chatty"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByT4nG9snGrWZ6WTE-pD_vjYaCS4UJYo4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

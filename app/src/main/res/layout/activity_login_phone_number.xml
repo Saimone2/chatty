@@ -96,6 +96,7 @@
         android:gravity="center">
 
         <com.hbb20.CountryCodePicker
+            android:id="@+id/login_country_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:ccp_areaCodeDetectedCountry="true"
@@ -104,6 +105,7 @@
             app:ccp_showNameCode="false" />
 
         <EditText
+            android:id="@+id/login_mobile_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -125,6 +127,7 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/send_pin_code_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_rounded_corner"
@@ -132,6 +135,7 @@
             android:textSize="17sp" />
 
         <ProgressBar
+            android:id="@+id/login_progress_bar"
             android:layout_width="32dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

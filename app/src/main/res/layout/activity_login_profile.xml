@@ -96,6 +96,7 @@
         android:gravity="center">
 
         <EditText
+            android:id="@+id/login_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -118,6 +119,7 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/login_finish_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_rounded_corner"
@@ -125,6 +127,7 @@
             android:textSize="17sp" />
 
         <ProgressBar
+            android:id="@+id/login_progress_bar"
             android:layout_width="32dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

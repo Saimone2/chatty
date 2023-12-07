@@ -14,4 +14,5 @@
     <string name="finish">FINISH</string>
     <string name="username">Username</string>
     <string name="send_pin_code">SEND PIN CODE</string>
+    <string name="pin_code">PIN CODE</string>
 </resources>
