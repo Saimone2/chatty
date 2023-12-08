@@ -1,7 +1,5 @@
 package com.saimone.chatty;
 
-import static com.saimone.chatty.utils.AndroidUtil.showToast;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.saimone.chatty.utils.AndroidUtil;
 
 import java.util.Objects;
 import java.util.Timer;
@@ -76,7 +75,7 @@ public class LoginPinCodeActivity extends AppCompatActivity {
 
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
-                                showToast(getApplicationContext(), "Pin code verification failed");
+                                AndroidUtil.showToast(getApplicationContext(), "Pin code verification failed");
                                 setInProgress(false);
                             }
 
@@ -85,7 +84,7 @@ public class LoginPinCodeActivity extends AppCompatActivity {
                                 super.onCodeSent(s, forceResendingToken);
                                 verificationCode = s;
                                 resendingToken = forceResendingToken;
-                                showToast(getApplicationContext(), "Pin code send successfully");
+                                AndroidUtil.showToast(getApplicationContext(), "Pin code send successfully");
                                 setInProgress(false);
                             }
                         });
@@ -136,7 +135,7 @@ public class LoginPinCodeActivity extends AppCompatActivity {
                 intent.putExtra("phone", phoneNumber);
                 startActivity(intent);
             } else {
-                showToast(getApplicationContext(), "Pin code verification failed");
+                AndroidUtil.showToast(getApplicationContext(), "Pin code verification failed");
             }
         });
     }

@@ -1,7 +1,5 @@
 package com.saimone.chatty;
 
-import static com.saimone.chatty.utils.FirebaseUtil.allUserCollectionReference;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +12,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
 import com.saimone.chatty.adapter.SearchUserRecyclerAdapter;
 import com.saimone.chatty.model.UserModel;
+import com.saimone.chatty.utils.FirebaseUtil;
 
 public class SearchUserActivity extends AppCompatActivity {
     EditText searchInput;
@@ -47,7 +46,7 @@ public class SearchUserActivity extends AppCompatActivity {
     }
 
     private void setupSearchRecyclerView(String searchText) {
-        Query query = allUserCollectionReference()
+        Query query = FirebaseUtil.allUserCollectionReference()
                 .whereGreaterThanOrEqualTo("username", searchText);
 
         FirestoreRecyclerOptions<UserModel> options = new FirestoreRecyclerOptions.Builder<UserModel>()

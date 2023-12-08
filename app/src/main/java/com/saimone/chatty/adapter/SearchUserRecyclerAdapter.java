@@ -1,6 +1,7 @@
 package com.saimone.chatty.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.saimone.chatty.ChatActivity;
 import com.saimone.chatty.R;
 import com.saimone.chatty.model.UserModel;
+import com.saimone.chatty.utils.AndroidUtil;
 import com.saimone.chatty.utils.FirebaseUtil;
 
 public class SearchUserRecyclerAdapter extends FirestoreRecyclerAdapter<UserModel, SearchUserRecyclerAdapter.UserModelViewHolder> {
@@ -34,7 +37,10 @@ public class SearchUserRecyclerAdapter extends FirestoreRecyclerAdapter<UserMode
         }
 
         holder.itemView.setOnClickListener(view -> {
-
+            Intent intent = new Intent(context, ChatActivity.class);
+            AndroidUtil.passUserModelAsIntent(intent, model);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
         });
     }
 

@@ -1,7 +1,5 @@
 package com.saimone.chatty;
 
-import static com.saimone.chatty.utils.FirebaseUtil.currentUserDetails;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -69,7 +67,7 @@ public class LoginProfileActivity extends AppCompatActivity {
 
     private void getUsername() {
         setInProgress(true);
-        currentUserDetails().get().addOnCompleteListener(task -> {
+        FirebaseUtil.currentUserDetails().get().addOnCompleteListener(task -> {
             setInProgress(false);
             if (task.isSuccessful()) {
                 userModel = task.getResult().toObject(UserModel.class);
