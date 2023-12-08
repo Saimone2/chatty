@@ -21,4 +21,7 @@
     <string name="search">Search</string>
     <string name="chats">Chats</string>
     <string name="profile">Profile</string>
+    <string name="chat_screen">Chat Screen</string>
+    <string name="profile_screen">Profile Screen</string>
+    <string name="search_user">Search User</string>
 </resources>
