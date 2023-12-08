@@ -66,7 +66,7 @@ public class ChatActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 chatroomModel = task.getResult().toObject(ChatroomModel.class);
                 if (chatroomModel == null) {
-                    chatroomModel = new ChatroomModel(chatroomId, Arrays.asList(FirebaseUtil.currentUserId(), otherUser.getUserId()), Timestamp.now(), "");
+                    chatroomModel = new ChatroomModel(chatroomId, Arrays.asList(FirebaseUtil.currentUserId(), otherUser.getUserId()), Timestamp.now(), "", "");
                     FirebaseUtil.getChatroomReference(chatroomId).set(chatroomModel);
                 }
             }
@@ -76,6 +76,8 @@ public class ChatActivity extends AppCompatActivity {
     private void sendMessageToUser(String message) {
         chatroomModel.setLastMessageSenderId(FirebaseUtil.currentUserId());
         chatroomModel.setLastMessageTimestamp(Timestamp.now());
+        chatroomModel.setLastMessage(message);
+
         FirebaseUtil.getChatroomReference(chatroomId).set(chatroomModel);
 
         ChatMessageModel chatMessageModel = new ChatMessageModel(message, FirebaseUtil.currentUserId(), Timestamp.now());
