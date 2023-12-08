@@ -24,4 +24,7 @@
     <string name="chat_screen">Chat Screen</string>
     <string name="profile_screen">Profile Screen</string>
     <string name="search_user">Search User</string>
+    <string name="back">Back</string>
+    <string name="phone_num_example">+380000000000</string>
+    <string name="username_placeholder">%s (Me)</string>
 </resources>

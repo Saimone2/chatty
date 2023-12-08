@@ -53,7 +53,7 @@ public class LoginProfileActivity extends AppCompatActivity {
             if (userModel != null) {
                 userModel.setUsername(username);
             } else {
-                userModel = new UserModel(phoneNumber, username, Timestamp.now());
+                userModel = new UserModel(phoneNumber, username, Timestamp.now(), FirebaseUtil.currentUserId());
             }
 
             FirebaseUtil.currentUserDetails().set(userModel).addOnCompleteListener(task -> {
