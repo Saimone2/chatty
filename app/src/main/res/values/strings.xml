@@ -32,4 +32,5 @@
     <string name="you_placeholder">You: %1$s</string>
     <string name="update_profile">Update profile</string>
     <string name="logout">Logout</string>
+    <string name="add_an_image">Add an image</string>
 </resources>

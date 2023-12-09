@@ -2,6 +2,7 @@ package com.saimone.chatty.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,26 +35,34 @@ public class RecentChatRecyclerAdapter extends FirestoreRecyclerAdapter<Chatroom
     protected void onBindViewHolder(@NonNull ChatroomModelViewHolder holder, int position, @NonNull ChatroomModel model) {
         FirebaseUtil.getOtherUserFromChatroomModel(model.getUserIds())
                 .get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                boolean isTheLastMessageFromMe = model.getLastMessageSenderId().equals(FirebaseUtil.currentUserId());
+                    if (task.isSuccessful()) {
+                        boolean isTheLastMessageFromMe = model.getLastMessageSenderId().equals(FirebaseUtil.currentUserId());
 
-                UserModel otherUserModel = task.getResult().toObject(UserModel.class);
+                        UserModel otherUserModel = task.getResult().toObject(UserModel.class);
 
-                holder.usernameText.setText(Objects.requireNonNull(otherUserModel).getUsername());
-                if (isTheLastMessageFromMe) {
-                    holder.lastMessageText.setText(context.getString(R.string.you_placeholder, model.getLastMessage()));
-                } else
-                    holder.lastMessageText.setText(model.getLastMessage());
-                holder.lastMessageTime.setText(FirebaseUtil.timestampToString(model.getLastMessageTimestamp()));
+                        FirebaseUtil.getOtherProfilePicStorageReference(Objects.requireNonNull(otherUserModel).getUserId()).getDownloadUrl()
+                                .addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        Uri uri = task1.getResult();
+                                        AndroidUtil.setProfilePic(context, uri, holder.profilePic);
+                                    }
+                                });
 
-                holder.itemView.setOnClickListener(view -> {
-                    Intent intent = new Intent(context, ChatActivity.class);
-                    AndroidUtil.passUserModelAsIntent(intent, otherUserModel);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+                        holder.usernameText.setText(Objects.requireNonNull(otherUserModel).getUsername());
+                        if (isTheLastMessageFromMe) {
+                            holder.lastMessageText.setText(context.getString(R.string.you_placeholder, model.getLastMessage()));
+                        } else
+                            holder.lastMessageText.setText(model.getLastMessage());
+                        holder.lastMessageTime.setText(FirebaseUtil.timestampToString(model.getLastMessageTimestamp()));
+
+                        holder.itemView.setOnClickListener(view -> {
+                            Intent intent = new Intent(context, ChatActivity.class);
+                            AndroidUtil.passUserModelAsIntent(intent, otherUserModel);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(intent);
+                        });
+                    }
                 });
-            }
-        });
     }
 
     @NonNull

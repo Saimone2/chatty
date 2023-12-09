@@ -1,6 +1,5 @@
 package com.saimone.chatty.model;
 
-
 import com.google.firebase.Timestamp;
 
 public class UserModel {

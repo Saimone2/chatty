@@ -2,6 +2,7 @@ package com.saimone.chatty.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import com.saimone.chatty.model.UserModel;
 import com.saimone.chatty.utils.AndroidUtil;
 import com.saimone.chatty.utils.FirebaseUtil;
 
+import java.util.Objects;
+
 public class SearchUserRecyclerAdapter extends FirestoreRecyclerAdapter<UserModel, SearchUserRecyclerAdapter.UserModelViewHolder> {
     Context context;
 
@@ -35,6 +38,14 @@ public class SearchUserRecyclerAdapter extends FirestoreRecyclerAdapter<UserMode
         if (model.getUserId().equals(FirebaseUtil.currentUserId())) {
             holder.usernameText.setText(String.format(context.getString(R.string.username_placeholder), model.getUsername()));
         }
+
+        FirebaseUtil.getOtherProfilePicStorageReference(Objects.requireNonNull(model).getUserId()).getDownloadUrl()
+                .addOnCompleteListener(task1 -> {
+                    if (task1.isSuccessful()) {
+                        Uri uri = task1.getResult();
+                        AndroidUtil.setProfilePic(context, uri, holder.profilePic);
+                    }
+                });
 
         holder.itemView.setOnClickListener(view -> {
             if (!model.getUserId().equals(FirebaseUtil.currentUserId())) {

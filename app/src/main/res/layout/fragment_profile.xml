@@ -9,17 +9,41 @@
     android:orientation="vertical"
     tools:context=".ProfileFragment">
 
-    <ImageView
-        android:id="@+id/profile_image_view"
+    <RelativeLayout
         android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginBottom="40dp"
-        android:background="@drawable/circle_background"
-        android:backgroundTint="@color/chatty_blue"
-        android:contentDescription="@string/profile"
-        android:scaleType="centerCrop"
-        android:src="@drawable/baseline_account_circle"
-        app:tint="@color/smoke_white" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/profile_image_view"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/circle_background"
+            android:backgroundTint="@color/white"
+            android:contentDescription="@string/profile"
+            android:scaleType="centerCrop"
+            android:src="@drawable/baseline_account_circle" />
+
+        <View
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignBottom="@+id/profile_image_view"
+            android:layout_alignParentEnd="true"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="14dp"
+            android:background="@drawable/edit_text_rounded_corner" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@+id/profile_image_view"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="6dp"
+            android:contentDescription="@string/add_an_image"
+            android:src="@drawable/baseline_add_box"
+            app:tint="@color/chatty_blue" />
+
+    </RelativeLayout>
 
     <EditText
         android:id="@+id/profile_username"
