@@ -33,6 +33,9 @@ public class ProfileFragment extends Fragment {
     Button updateProfileBtn;
     ProgressBar progressBar;
     TextView logoutText;
+    ImageView profilePicPlus;
+    View profilePicPlusBackground;
+
     UserModel currentUserModel;
     ActivityResultLauncher<Intent> imagePickLauncher;
     Uri selectedImageUri;
@@ -69,6 +72,8 @@ public class ProfileFragment extends Fragment {
         updateProfileBtn = view.findViewById(R.id.profile_update_btn);
         progressBar = view.findViewById(R.id.profile_progress_bar);
         logoutText = view.findViewById(R.id.logout_text);
+        profilePicPlus = view.findViewById(R.id.profile_pic_plus);
+        profilePicPlusBackground = view.findViewById(R.id.profile_pic_plus_background);
 
         getUserData();
 
@@ -138,6 +143,9 @@ public class ProfileFragment extends Fragment {
                     if (task.isSuccessful()) {
                         Uri uri = task.getResult();
                         AndroidUtil.setProfilePic(getContext(), uri, profilePic);
+
+                        profilePicPlus.setVisibility(View.GONE);
+                        profilePicPlusBackground.setVisibility(View.GONE);
                     }
                 });
 

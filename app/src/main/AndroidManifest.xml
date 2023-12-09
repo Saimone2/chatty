@@ -13,8 +13,9 @@
         android:theme="@style/Theme.Chatty"
         tools:targetApi="31">
 
-        <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/icon"/>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/icon" />
 
         <activity
             android:name=".ChatActivity"
@@ -52,5 +53,4 @@
             </intent-filter>
         </service>
     </application>
-
 </manifest>

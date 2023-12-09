@@ -25,6 +25,7 @@
             android:src="@drawable/baseline_account_circle" />
 
         <View
+            android:id="@+id/profile_pic_plus_background"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_alignBottom="@+id/profile_image_view"
@@ -34,6 +35,7 @@
             android:background="@drawable/edit_text_rounded_corner" />
 
         <ImageView
+            android:id="@+id/profile_pic_plus"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignBottom="@+id/profile_image_view"
