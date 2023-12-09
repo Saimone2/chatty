@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.saimone.chatty.model.UserModel;
 import com.saimone.chatty.utils.AndroidUtil;
 import com.saimone.chatty.utils.FirebaseUtil;
@@ -73,15 +74,17 @@ public class ProfileFragment extends Fragment {
 
         updateProfileBtn.setOnClickListener(view1 -> updateBtnClick());
 
-        logoutText.setOnClickListener(view12 -> {
-            FirebaseUtil.logout();
-            Intent intent = new Intent(getContext(), SplashActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-        });
+        logoutText.setOnClickListener(view12 -> FirebaseMessaging.getInstance().deleteToken()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseUtil.logout();
+                        Intent intent = new Intent(getContext(), SplashActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                }));
 
-        profilePic.setOnClickListener(view13 -> ImagePicker
-                .with(this)
+        profilePic.setOnClickListener(view13 -> ImagePicker.with(this)
                 .cropSquare()
                 .compress(512)
                 .maxResultSize(512, 512)
