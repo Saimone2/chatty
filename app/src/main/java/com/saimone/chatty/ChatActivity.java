@@ -2,6 +2,8 @@ package com.saimone.chatty;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -27,7 +29,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -40,6 +44,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ChatActivity extends AppCompatActivity {
+    private static final int NOTIFICATION_DELAY_MILLIS = 20 * 1000;
     UserModel otherUser;
     String chatroomId;
     ChatroomModel chatroomModel;
@@ -50,6 +55,10 @@ public class ChatActivity extends AppCompatActivity {
     ImageView profilePic;
     RecyclerView recyclerView;
     ChatRecyclerAdapter adapter;
+    private List<String> pendingMessages;
+    private Handler notificationHandler;
+    private boolean isNotificationSent;
+    boolean isTimerStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +76,11 @@ public class ChatActivity extends AppCompatActivity {
         otherUsername.setText(otherUser.getUsername());
 
         chatroomId = FirebaseUtil.getChatroomId(FirebaseUtil.currentUserId(), otherUser.getUserId());
+        pendingMessages = new ArrayList<>();
+        notificationHandler = new Handler();
+        isNotificationSent = false;
+        isTimerStart = false;
+
 
         FirebaseUtil.getOtherProfilePicStorageReference(Objects.requireNonNull(otherUser).getUserId()).getDownloadUrl()
                 .addOnCompleteListener(task1 -> {
@@ -111,10 +125,32 @@ public class ChatActivity extends AppCompatActivity {
         ChatMessageModel chatMessageModel = new ChatMessageModel(message, FirebaseUtil.currentUserId(), Timestamp.now());
         FirebaseUtil.getChatroomMessageReference(chatroomId).add(chatMessageModel).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+
                 messageInput.setText("");
-                sendNotification(message);
+
+                if (!isNotificationSent) {
+                    pendingMessages.add(message);
+
+                    if (!isTimerStart) {
+                        isTimerStart = true;
+                        notificationHandler.removeCallbacksAndMessages(null);
+                        notificationHandler.postDelayed(this::sendBatchNotification, NOTIFICATION_DELAY_MILLIS);
+                    }
+
+                    if (pendingMessages.size() >= 5) {
+                        sendBatchNotification();
+                    }
+                }
             }
         });
+    }
+
+    private void sendBatchNotification() {
+        String combinedMessage = TextUtils.join("\n", pendingMessages);
+        sendNotification(combinedMessage);
+        isNotificationSent = true;
+        notificationHandler.removeCallbacksAndMessages(null);
+        pendingMessages.clear();
     }
 
     private void sendNotification(String message) {

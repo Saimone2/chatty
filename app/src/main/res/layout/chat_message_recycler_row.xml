@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:padding="3dp">
 
     <LinearLayout
         android:id="@+id/left_chat_layout"
@@ -12,7 +12,8 @@
         android:layout_marginEnd="80dp"
         android:background="@drawable/edit_text_rounded_corner"
         android:backgroundTint="@color/coral_orange"
-        android:padding="8dp">
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp">
 
         <TextView
             android:id="@+id/left_chat_textview"
@@ -31,7 +32,8 @@
         android:layout_marginStart="80dp"
         android:background="@drawable/edit_text_rounded_corner"
         android:backgroundTint="@color/mint_green"
-        android:padding="8dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
         tools:ignore="RelativeOverlap">
 
         <TextView
