@@ -17,6 +17,7 @@
         android:gravity="center">
 
         <RelativeLayout
+            android:id="@+id/round1"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_margin="15dp"
@@ -51,6 +52,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/round3"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_margin="15dp"
@@ -70,14 +72,15 @@
     </LinearLayout>
 
     <ImageView
-        android:layout_width="150dp"
+        android:layout_width="170dp"
         android:layout_height="150dp"
         android:layout_weight="20"
         android:contentDescription="@string/phone_number"
-        android:src="@drawable/baseline_phone_android"
+        android:src="@drawable/baseline_security"
         app:tint="@color/chatty_blue" />
 
     <TextView
+        android:id="@+id/enter_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"

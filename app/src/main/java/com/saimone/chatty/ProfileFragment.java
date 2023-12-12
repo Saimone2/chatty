@@ -2,6 +2,8 @@ package com.saimone.chatty;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
@@ -35,10 +38,11 @@ public class ProfileFragment extends Fragment {
     TextView logoutText;
     ImageView profilePicPlus;
     View profilePicPlusBackground;
-
     UserModel currentUserModel;
     ActivityResultLauncher<Intent> imagePickLauncher;
     Uri selectedImageUri;
+    int nightModeFlags;
+
 
     public ProfileFragment() {
 
@@ -66,6 +70,8 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
         profilePic = view.findViewById(R.id.profile_image_view);
         usernameInput = view.findViewById(R.id.profile_username);
         phoneInput = view.findViewById(R.id.profile_phone_number);
@@ -74,6 +80,14 @@ public class ProfileFragment extends Fragment {
         logoutText = view.findViewById(R.id.logout_text);
         profilePicPlus = view.findViewById(R.id.profile_pic_plus);
         profilePicPlusBackground = view.findViewById(R.id.profile_pic_plus_background);
+
+        if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+            usernameInput.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), R.color.charcoal_gray)));
+            phoneInput.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), R.color.charcoal_gray)));
+        } else {
+            usernameInput.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), R.color.white)));
+            phoneInput.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), R.color.white)));
+        }
 
         getUserData();
 

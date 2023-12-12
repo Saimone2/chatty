@@ -34,6 +34,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/round2"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_margin="15dp"
@@ -51,6 +52,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/round3"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_margin="15dp"
@@ -78,6 +80,7 @@
         app:tint="@color/chatty_blue" />
 
     <TextView
+        android:id="@+id/enter_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -99,6 +102,10 @@
             android:id="@+id/login_country_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_rounded_corner"
+            android:backgroundTint="@color/light_gray"
+            android:elevation="5dp"
+            android:padding="4dp"
             app:ccp_areaCodeDetectedCountry="true"
             app:ccp_defaultPhoneCode="380"
             app:ccp_showFlag="false"

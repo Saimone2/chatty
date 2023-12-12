@@ -1,10 +1,14 @@
 package com.saimone.chatty;
 
+import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,21 +23,38 @@ public class SearchUserActivity extends AppCompatActivity {
     ImageButton searchButton;
     ImageButton backButton;
     RecyclerView recyclerView;
+    RelativeLayout toolbar;
     SearchUserRecyclerAdapter adapter;
+    int nightModeFlags;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_user);
 
+        nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
         searchInput = findViewById(R.id.search_username_input);
         searchButton = findViewById(R.id.search_user_btn);
         backButton = findViewById(R.id.back_button);
         recyclerView = findViewById(R.id.search_user_recycler_view);
+        toolbar = findViewById(R.id.toolbar);
 
         backButton.setOnClickListener(view -> getOnBackPressedDispatcher().onBackPressed());
 
         searchInput.requestFocus();
+
+        if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+            searchButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.chatty_dark_blue)));
+            searchButton.setImageTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.chatty_blue)));
+            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.chatty_dark_blue));
+            searchInput.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.charcoal_gray)));
+        } else {
+            searchButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.chatty_blue)));
+            searchButton.setImageTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.smoke_white)));
+            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.chatty_blue));
+            searchInput.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)));
+        }
 
         searchButton.setOnClickListener(view -> {
             String searchText = searchInput.getText().toString();

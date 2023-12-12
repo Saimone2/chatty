@@ -1,5 +1,7 @@
 package com.saimone.chatty;
 
+import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,10 +9,12 @@ import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,15 +59,20 @@ public class ChatActivity extends AppCompatActivity {
     ImageView profilePic;
     RecyclerView recyclerView;
     ChatRecyclerAdapter adapter;
+    RelativeLayout toolbar;
     private List<String> pendingMessages;
     private Handler notificationHandler;
     private boolean isNotificationSent;
     boolean isTimerStart;
+    int nightModeFlags;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
 
         messageInput = findViewById(R.id.chat_message_input);
         sendMessageBtn = findViewById(R.id.message_send_btn);
@@ -71,6 +80,7 @@ public class ChatActivity extends AppCompatActivity {
         otherUsername = findViewById(R.id.other_username);
         recyclerView = findViewById(R.id.chat_recycler_view);
         profilePic = findViewById(R.id.profile_pic_image_view);
+        toolbar = findViewById(R.id.toolbar);
 
         otherUser = AndroidUtil.getUserModelFromIntent(getIntent());
         otherUsername.setText(otherUser.getUsername());
@@ -81,6 +91,13 @@ public class ChatActivity extends AppCompatActivity {
         isNotificationSent = false;
         isTimerStart = false;
 
+        if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.chatty_dark_blue));
+            messageInput.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.charcoal_gray)));
+        } else {
+            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.chatty_blue));
+            messageInput.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)));
+        }
 
         FirebaseUtil.getOtherProfilePicStorageReference(Objects.requireNonNull(otherUser).getUserId()).getDownloadUrl()
                 .addOnCompleteListener(task1 -> {

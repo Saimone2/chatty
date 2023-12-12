@@ -1,15 +1,12 @@
 <resources>
+
     <style name="Base.Theme.Chatty" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/chatty_blue</item>
         <item name="colorPrimaryVariant">@color/chatty_blue</item>
-        <item name="colorOnPrimary">@color/white</item>
-
+        <item name="colorOnPrimary">@color/smoke_white</item>
         <item name="colorSecondary">@color/smoke_white</item>
-        <item name="colorSecondaryVariant">@color/mint_green</item>
-        <item name="colorOnSecondary">@color/black</item>
-
-        <item name="android:windowBackground">@color/smoke_white</item>
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="bottomNavigationStyle">@style/Widget.Design.BottomNavigationView</item>
     </style>
 
     <style name="Theme.Chatty" parent="Base.Theme.Chatty" />

@@ -10,7 +10,6 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/chatty_blue"
         android:paddingHorizontal="5dp"
         android:paddingVertical="4dp">
 
@@ -67,11 +66,10 @@
             android:layout_height="48dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/edit_text_rounded_corner"
             android:contentDescription="@string/search"
             android:padding="4dp"
-            android:src="@drawable/baseline_search"
-            app:tint="@color/chatty_blue" />
+            android:src="@drawable/baseline_search" />
 
     </RelativeLayout>
 
@@ -80,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/search_user_layout"
-        android:padding="10dp">
+        android:paddingHorizontal="10dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 

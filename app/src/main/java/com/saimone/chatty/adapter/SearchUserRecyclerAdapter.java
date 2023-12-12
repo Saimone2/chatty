@@ -2,14 +2,18 @@ package com.saimone.chatty.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -68,6 +72,8 @@ public class SearchUserRecyclerAdapter extends FirestoreRecyclerAdapter<UserMode
         TextView usernameText;
         TextView phoneText;
         ImageView profilePic;
+        LinearLayout linearLayout;
+        int nightModeFlags;
 
         public UserModelViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,6 +81,15 @@ public class SearchUserRecyclerAdapter extends FirestoreRecyclerAdapter<UserMode
             usernameText = itemView.findViewById(R.id.username_text);
             phoneText = itemView.findViewById(R.id.phone_text);
             profilePic = itemView.findViewById(R.id.profile_pic_image_view);
+            linearLayout = itemView.findViewById(R.id.search_linear_layout);
+
+            nightModeFlags = itemView.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+            if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+                linearLayout.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(itemView.getContext(), R.color.charcoal_gray)));
+            } else {
+                linearLayout.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(itemView.getContext(), R.color.white)));
+            }
         }
     }
 }

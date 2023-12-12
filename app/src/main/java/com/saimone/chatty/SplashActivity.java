@@ -4,10 +4,14 @@ import static com.saimone.chatty.utils.FirebaseUtil.isLoggedIn;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.saimone.chatty.model.UserModel;
 import com.saimone.chatty.utils.AndroidUtil;
@@ -17,10 +21,28 @@ import java.util.Objects;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
+    RelativeLayout layout;
+    ImageView icon;
+    int nightModeFlags;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+        icon = findViewById(R.id.image_view_icon);
+        layout = findViewById(R.id.splash_layout);
+
+        if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+            layout.setBackgroundColor(ContextCompat.getColor(this, R.color.chatty_dark_blue));
+            icon.setImageResource(R.drawable.icon_dark);
+        } else {
+            layout.setBackgroundColor(ContextCompat.getColor(this, R.color.chatty_blue));
+            icon.setImageResource(R.drawable.icon_light);
+        }
 
         if (FirebaseUtil.isLoggedIn() && getIntent().getExtras() != null) {
             String userId = getIntent().getExtras().getString("userId");

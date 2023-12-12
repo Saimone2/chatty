@@ -1,15 +1,19 @@
 package com.saimone.chatty;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,17 +36,26 @@ public class LoginPinCodeActivity extends AppCompatActivity {
     Button nextBtn;
     ProgressBar progressBar;
     TextView resendPinCode;
+    RelativeLayout round1;
+    RelativeLayout round3;
     FirebaseAuth auth = FirebaseAuth.getInstance();
+    TextView enterTextView;
+    int nightModeFlags;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_pin_code);
 
+        nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
         loginPinCode = findViewById(R.id.login_pin_code);
         nextBtn = findViewById(R.id.login_next_btn);
         progressBar = findViewById(R.id.login_progress_bar);
         resendPinCode = findViewById(R.id.resend_pin_code);
+        round1 = findViewById(R.id.round1);
+        round3 = findViewById(R.id.round3);
+        enterTextView = findViewById(R.id.enter_text_view);
 
         phoneNumber = Objects.requireNonNull(getIntent().getExtras()).getString("phone");
 
@@ -54,6 +67,17 @@ public class LoginPinCodeActivity extends AppCompatActivity {
             signIn(credential);
             setInProgress(true);
         });
+
+        if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+            round1.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.charcoal_gray)));
+            round3.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.charcoal_gray)));
+            loginPinCode.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.charcoal_gray)));
+            enterTextView.setTextColor(ContextCompat.getColor(this, R.color.chatty_blue));
+        } else {
+            round1.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_gray)));
+            round3.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_gray)));
+            loginPinCode.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)));
+        }
 
         resendPinCode.setOnClickListener(view -> sendPinCode(phoneNumber, true));
     }

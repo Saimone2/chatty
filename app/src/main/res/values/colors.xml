@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="chatty_blue">#3498DB</color>
-    <color name="bubblegum_pink">#FF6B81</color>
-    <color name="mint_green">#2ECC71</color>
-    <color name="sunny_yellow">#FECA57</color>
-    <color name="coral_orange">#FF6348</color>
+    <color name="chatty_blue">#FF3498DB</color>
+    <color name="chatty_dark_blue">#FF17212B</color>
+
+    <color name="mint_green">#FF2ECC71</color>
+    <color name="coral_orange">#FFFF6348</color>
 
     <color name="black">#FF000000</color>
-    <color name="charcoal_gray">#2C3E50</color>
-    <color name="light_gray">#C3C3C3</color>
-    <color name="smoke_white">#F5F5F5</color>
+    <color name="dark_blue">#FF0E1621</color>
+    <color name="charcoal_gray">#FF2C3E50</color>
+    <color name="light_gray">#FFC3C3C3</color>
+    <color name="smoke_white">#FFF5F5F5</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
